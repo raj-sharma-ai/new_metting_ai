@@ -1,0 +1,71 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc.*
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+Env/
+meeting/
+
+# Local data artifacts
+meetings.db
+uploads/
+recordings/
+reports/
+
+# Node / Electron
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.parcel-cache/
+.turbo/
+.next/
+out/
+dist/
+build/
+electron-app/out/
+electron-app/.webpack/
+electron-app/.cache/
+electron-app/node_modules/
+electron-app/src/renderer/dist/
+
+# Electron Forge / Builder outputs
+electron-app/out/
+electron-app/make/
+electron-app/*.nupkg
+electron-app/*.msi
+electron-app/*.dmg
+electron-app/*.zip
+
+# IDE / editor metadata
+.idea/
+.vscode/
+*.code-workspace
+
+# Environment & secrets
+.env
+.env.*
+*.local
+
+

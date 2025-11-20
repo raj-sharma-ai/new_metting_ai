@@ -1,0 +1,251 @@
+<!-- Thia is popup.html file -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Meet Summarizer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 380px;
+      min-height: 450px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      padding: 0;
+    }
+
+    .header {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .status-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .status-card h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+
+    .status-indicator.recording {
+      background: #ef4444;
+    }
+
+    .status-indicator.idle {
+      background: #94a3b8;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #667eea;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .summary-preview {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      max-height: 150px;
+      overflow-y: auto;
+      margin-top: 12px;
+    }
+
+    .summary-preview::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .summary-preview::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+
+    .summary-preview::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+    }
+
+    .info-text {
+      font-size: 12px;
+      opacity: 0.8;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .link {
+      color: #fff;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .link:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎙️ AI Meet Summarizer</h1>
+    <p>Smart Google Meet Transcription</p>
+  </div>
+
+  <div class="content">
+    <!-- Status Card -->
+    <div class="status-card">
+      <h3>
+        <span class="status-indicator" id="statusDot"></span>
+        <span id="statusText">Idle</span>
+      </h3>
+      <p id="statusDetails" style="font-size: 12px; opacity: 0.9;">Waiting for meeting...</p>
+    </div>
+
+    <!-- Controls -->
+    <div id="controls">
+      <button class="btn btn-primary" id="startBtn">
+        <span>▶️</span>
+        Start Recording
+      </button>
+      
+      <button class="btn btn-danger hidden" id="stopBtn">
+        <span>⏹️</span>
+        Stop & Generate Summary
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading hidden" id="loadingState">
+      <div class="spinner"></div>
+      <span>Processing audio...</span>
+    </div>
+
+    <!-- Summary Preview -->
+    <div id="summaryContainer" class="hidden">
+      <div class="status-card">
+        <h3>📋 Latest Summary</h3>
+        <div class="summary-preview" id="summaryText">
+          No summary available yet
+        </div>
+        <a class="link" id="viewFullLink" style="margin-top: 8px; display: inline-block;">
+          View Full Report →
+        </a>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <p class="info-text">
+      Join a Google Meet to start recording
+    </p>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

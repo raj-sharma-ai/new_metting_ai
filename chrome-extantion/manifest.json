@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "AI Meet Summarizer",
+  "version": "1.0.0",
+  "description": "Record, transcribe, and summarize Google Meet calls with AI",
+  
+  "permissions": [
+    "activeTab",
+    "tabCapture",
+    "storage",
+    "notifications",
+    "offscreen"
+  ],
+  
+  "host_permissions": [
+    "https://meet.google.com/*",
+    "http://localhost:8000/*",
+    "http://localhost:8501/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/swimming-pool (1).png",
+      "32": "icons/swimming-pool (2).png",
+      "48": "icons/swimming-pool.png",
+      "128": "icons/swimming-pool.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icons/swimming-pool (1).png",
+      "32": "icons/swimming-pool (2).png",
+      "48": "icons/swimming-pool.png",
+      "128": "icons/swimming-pool.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["offscreen.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

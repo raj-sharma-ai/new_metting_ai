@@ -1,0 +1,38 @@
+{
+  "name": "electron-app",
+  "version": "1.0.0",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "watch:renderer": "node scripts/build-renderer.js --watch",
+    "build:renderer": "node scripts/build-renderer.js",
+    "build": "npm run build:renderer && electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "keywords": [],
+  "author": "Meeting.ai",
+  "license": "ISC",
+  "description": "AI-powered meeting recorder, live transcription, and summarization desktop app.",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "electron-squirrel-startup": "^1.0.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.10.2",
+    "@electron-forge/maker-deb": "^7.10.2",
+    "@electron-forge/maker-rpm": "^7.10.2",
+    "@electron-forge/maker-squirrel": "^7.10.2",
+    "@electron-forge/maker-zip": "^7.10.2",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.10.2",
+    "@electron-forge/plugin-fuses": "^7.10.2",
+    "@electron/fuses": "^1.8.0",
+    "concurrently": "^9.1.0",
+    "electron": "^39.2.1",
+    "esbuild": "^0.24.0"
+  }
+}
