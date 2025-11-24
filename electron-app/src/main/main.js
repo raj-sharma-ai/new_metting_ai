@@ -17,7 +17,8 @@ let currentMeetingId = null;
 
 // Configuration
 const CONFIG = {
-  backendUrl: process.env.BACKEND_URL || 'http://localhost:8000',
+  // backendUrl: process.env.BACKEND_URL || 'http://localhost:8000',
+  backendUrl: 'http://20.193.255.93:8000',
   audioSampleRate: 16000,
   audioChannels: 1,
   chunkDuration: 10 // seconds
