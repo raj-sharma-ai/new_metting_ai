@@ -716,7 +716,7 @@ async def generate_summary(transcript: str, speakers_data: List[dict]):
 )
 
 
-        HF_TOKEN = os.getenv("Hugging_Face_Api")
+        # HF_TOKEN = os.getenv("Hugging_Face_Api")
         # endpoint = HuggingFaceEndpoint(
         #     repo_id="meta-llama/Llama-3-70b-instruct",
         #     task="conversational",
@@ -728,7 +728,7 @@ async def generate_summary(transcript: str, speakers_data: List[dict]):
         endpoint = HuggingFaceEndpoint(
             repo_id="openai/gpt-oss-120b",
             task="conversational",
-            huggingfacehub_api_token=HF_TOKEN,
+            huggingfacehub_api_token="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",
 
             temperature=0.1,            # ultra-stable, less hallucination
             top_p=0.9,                  # balanced creativity + control
