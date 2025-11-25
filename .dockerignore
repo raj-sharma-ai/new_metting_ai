@@ -1,3 +1,7 @@
+recordings/
+electron-app/
+chrome-extantion/
+meeting/
 __pycache__/
 *.pyc
 .git/
