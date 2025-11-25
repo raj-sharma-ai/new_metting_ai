@@ -791,7 +791,7 @@ Question: {question}
 
 Provide a clear, specific answer based only on the information in the transcript. If the answer is not in the transcript, say so."""
 
-        HF_TOKEN = os.getenv("Hugging_Face_Api")
+        HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
         endpoint = HuggingFaceEndpoint(
             repo_id="openai/gpt-oss-120b",

@@ -67,5 +67,6 @@ electron-app/*.zip
 .env
 .env.*
 *.local
+.docker-compose.yml
 
 
