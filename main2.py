@@ -421,8 +421,8 @@ async def websocket_health():
     }
 
 # Configuration
-MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+# MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
+# OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 UPLOAD_DIR = Path("uploads")
 REPORTS_DIR = Path("reports")
@@ -724,11 +724,12 @@ async def generate_summary(transcript: str, speakers_data: List[dict]):
         #     temperature=0.3,
         #     max_new_tokens=600,
         # )
+        HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
         endpoint = HuggingFaceEndpoint(
             repo_id="openai/gpt-oss-120b",
             task="conversational",
-            huggingfacehub_api_token="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",
+            huggingfacehub_api_token=HF_TOKEN,
 
             temperature=0.1,            # ultra-stable, less hallucination
             top_p=0.9,                  # balanced creativity + control
