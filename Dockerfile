@@ -99,7 +99,7 @@ ENV PYTHONUNBUFFERED=1 \
     TRANSFORMERS_OFFLINE=1 \
     HF_HUB_DISABLE_TELEMETRY=1 \
     HF_HUB_OFFLINE=0 \
-    HUGGINGFACEHUB_API_TOKEN=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
+    # HUGGINGFACEHUB_API_TOKEN=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
 
 WORKDIR /app
 
@@ -129,7 +129,7 @@ RUN mkdir -p /app/hf
 COPY . .
 
 # Delete auto-downloaded caches
-RUN rm -rf /root/.cache/huggingface
+ RUN rm -rf /root/.cache/huggingface
 
 # Correct file permissions
 RUN adduser --disabled-password --gecos "" appuser && \
