@@ -600,7 +600,7 @@ import assemblyai as aai
 from fastapi import HTTPException
 
 # Set your API key (Free: https://www.assemblyai.com/dashboard/signup)
-aai.settings.api_key = "4c2b6d4d96474386ab5f3ef767d06ca6"
+aai.settings.api_key = "b8d6c120888b4fd8af5b1611faebbb59"
 
 async def transcribe_audio(file_path: str, meeting_id: str):
     """Transcribe with REAL speaker detection using AssemblyAI"""
